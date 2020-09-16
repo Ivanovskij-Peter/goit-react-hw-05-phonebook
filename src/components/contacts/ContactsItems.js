@@ -1,17 +1,22 @@
 import React from 'react';
+import './ContactsItems.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function ContactsItems({ contactsItems, deleteContact }) {
-  console.log(contactsItems);
   return (
-    <ul>
+    <TransitionGroup component="ul" className="list">
       {contactsItems.map(el => (
-        <li key={el.id}>
-          <p>{el.name}</p>
-          <p>:{el.number}</p>
-          <button onClick={() => deleteContact(el.id)}>Delete</button>
-        </li>
+        <CSSTransition key={el.id} timeout={300} classNames="list-fade">
+          <li key={el.id} className="item">
+            <p>{el.name}</p>
+            <p>{el.number}</p>
+            <button className="btn" onClick={() => deleteContact(el.id)}>
+              X
+            </button>
+          </li>
+        </CSSTransition>
       ))}
-    </ul>
+    </TransitionGroup>
   );
 }
 export default ContactsItems;

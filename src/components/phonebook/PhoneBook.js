@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Filter from '../filter/Filter';
 import ContactsForm from '../contacts/ContactsForm';
 import ContactsItems from '../contacts/ContactsItems';
+import './PhoneBook.css';
+import { CSSTransition } from 'react-transition-group';
 
 class PhoneBook extends Component {
   state = {
@@ -48,11 +50,23 @@ class PhoneBook extends Component {
 
   render() {
     return (
-      <div>
-        <h1>PhoneBook</h1>
+      <div className="container">
+        <CSSTransition
+          in={true}
+          appear={true}
+          classNames="Phone-slideIn"
+          timeout={1000}
+          unmountOnExit
+        >
+          <h1 className="Phone">PhoneBook</h1>
+        </CSSTransition>
         <ContactsForm getContact={this.getContact} />
-        <h2>Contacts</h2>
-        <Filter filter={this.state.filter} getFilterName={this.getFilterName} />
+        {this.state.contacts.length > 1 && (
+          <Filter
+            filter={this.state.filter}
+            getFilterName={this.getFilterName}
+          />
+        )}
         <ContactsItems
           contactsItems={this.filterItems()}
           deleteContact={this.deleteContact}

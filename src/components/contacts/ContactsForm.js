@@ -29,9 +29,9 @@ class ContactsForm extends Component {
       <form
         onSubmit={this.handleSubmit}
         style={{
-          border: '1px solid black',
-          width: '250px',
-          height: '200px',
+          border: '1px solid whisper',
+          width: '400px',
+          height: '165px',
         }}
       >
         <label>Name</label>
@@ -39,8 +39,9 @@ class ContactsForm extends Component {
           name="name"
           style={{
             display: 'block',
-            marginTop: '10px',
+            marginTop: '5px',
             marginBottom: '10px',
+            width: '100%',
           }}
           placeholder="add name"
           value={this.state.name}
@@ -51,14 +52,25 @@ class ContactsForm extends Component {
           name="number"
           style={{
             display: 'block',
-            marginTop: '10px',
+            marginTop: '5px',
             marginBottom: '10px',
+            width: '100%',
           }}
           placeholder="add number"
           value={this.state.number}
           onChange={this.handleChange}
         ></input>
-        <button style={{ marginTop: '15px' }}>Add contact</button>
+        <button
+          style={{
+            marginTop: '15px',
+            width: '100%',
+            backgroundColor: 'blue',
+            color: 'white',
+            height: '35px',
+          }}
+        >
+          Add contact
+        </button>
       </form>
     );
   }

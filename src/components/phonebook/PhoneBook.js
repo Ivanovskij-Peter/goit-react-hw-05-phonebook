@@ -9,6 +9,7 @@ class PhoneBook extends Component {
   state = {
     contacts: [],
     filter: '',
+    isExsist: false,
   };
   componentDidMount() {
     const contacts = localStorage.getItem('contacts')
@@ -24,7 +25,10 @@ class PhoneBook extends Component {
   getContact = contact => {
     const result = this.state.contacts.some(el => el.name === contact.name);
     if (result) {
-      alert(`is already in contacts`);
+      this.setState({ isExsist: true });
+      setTimeout(() => {
+        this.setState({ isExsist: false });
+      }, 1000);
     } else {
       this.setState(prev => {
         return { ...prev, contacts: [...prev.contacts, contact] };
@@ -59,6 +63,14 @@ class PhoneBook extends Component {
           unmountOnExit
         >
           <h1 className="Phone">PhoneBook</h1>
+        </CSSTransition>
+        <CSSTransition
+          in={this.state.isExsist}
+          classNames="alert"
+          timeout={500}
+          unmountOnExit
+        >
+          <h2 className="alert">This name is already in contacts!</h2>
         </CSSTransition>
         <ContactsForm getContact={this.getContact} />
         {this.state.contacts.length > 1 && (
